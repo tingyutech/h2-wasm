@@ -8,7 +8,10 @@ use http::{HeaderMap, Request, Response};
 use std::cmp::Ordering;
 use std::io;
 use std::task::{Context, Poll, Waker};
+#[cfg(not(target_arch = "wasm32"))]
 use std::time::Instant;
+#[cfg(target_arch = "wasm32")]
+use wasmtimer::std::Instant;
 
 #[derive(Debug)]
 pub(super) struct Recv {
